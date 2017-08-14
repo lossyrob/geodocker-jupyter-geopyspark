@@ -5,9 +5,9 @@ IMG := quay.io/geodocker/jupyter-geopyspark
 STAGE0 := jamesmcclain/jupyter-geopyspark:stage0
 STAGE1 := $(IMG):80da618
 STAGE2 := $(IMG):$(TAG)
-GEOPYSPARK_SHA ?= eb32e18cfad65cbc1805dbace17ff22548d0cd2e
-GEOPYSPARK_NETCDF_SHA ?= fe222c25512d26c2578596d654686a81fa84388f
-GEONOTEBOOK_SHA ?= 033a86d89fed4e0add0fd20a04f23e738e05e304
+GEOPYSPARK_SHA ?= bdc752e589e365f8d81912e08db936ffb5d689a1
+GEOPYSPARK_NETCDF_SHA ?= 3f18ff9c9613932b4dc10e12ea9a1338260a3ff6
+GEONOTEBOOK_SHA ?= e5b4f3383cc38d3b546dac174ee54aa2d8fb2a84
 GEOPYSPARK_VERSION ?= 0.2.0
 GEOPYSPARK-JAR := geotrellis-backend-assembly-$(GEOPYSPARK_VERSION).jar
 PYTHON_BLOB1 := friends-of-geopyspark.tar.gz
@@ -74,7 +74,7 @@ blobs/%: archives/%
 	cp -f $< $@
 
 stage0: Dockerfile.stage0
-	(docker pull $(STAGE0)) || (build -t $(STAGE0) -f Dockerfile.stage0 .)
+	(docker pull $(STAGE0)) || (docker build -t $(STAGE0) -f Dockerfile.stage0 .)
 
 ifeq ($(TRAVIS),1)
 archives/$(GDAL_BLOB):
