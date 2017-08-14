@@ -92,6 +92,18 @@ pip3 install --user -r /tmp/geonotebook_deps.txt &> /dev/null
 
 set +x
 
+## Instal DevSeed' satsearch
+pip3 install --user satsearch
+
+## Install Raster Foundry client
+yum install -y git
+yum install -y libffi-devel
+yum install -y openssl-devel
+pip3 install --user git+https://github.com/raster-foundry/raster-foundry-python-client
+
+## Mapbox rio-color
+pip install --user rio-color
+
 # archive libraries
 cd $HOME/.local/lib/python3.4/site-packages
 touch .xxx

@@ -44,13 +44,10 @@ RUN /scripts/install-blob2.sh $PYTHONBLOB2
 
 USER root
 
-# Install additional python dependencies
-RUN pip install satsearch
-
 USER hadoop
 
 # Install Extra Jars
 COPY blobs/gddp-assembly-$VERSION.jar /opt/jars/
 
 WORKDIR /tmp
-CMD ["jupyterhub", "--no-ssl", "--Spawner.notebook_dir=/home/hadoop/notebooks"]
+CMD ["jupyterhub", "--no-ssl", "--NotebookApp.iopub_data_rate_limit=10000000", "--Spawner.notebook_dir=/home/hadoop/notebooks"]

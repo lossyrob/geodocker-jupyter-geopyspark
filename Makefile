@@ -5,15 +5,10 @@ IMG := quay.io/geodocker/jupyter-geopyspark
 STAGE0 := jamesmcclain/jupyter-geopyspark:stage0
 STAGE1 := $(IMG):80da618
 STAGE2 := $(IMG):$(TAG)
-GEONOTEBOOK_SHA ?= 033a86d89fed4e0add0fd20a04f23e738e05e304
-# RC5
-GEOPYSPARK_SHA ?= 133ce7bb5f085a2561f18ec6d7ebe1e4037dae89
+GEONOTEBOOK_SHA ?= 2c0073c60afc610f7d9616edbb3843e5ba8b68af
+GEOPYSPARK_SHA ?= 76e2604cb2dedf5dd8e70c3ae416ae9181128a24
 GEOPYSPARK_NETCDF_SHA ?= 803b0b64a43255644d34a5a162be59250c4cc836
-# RC4
-# GEOPYSPARK_SHA ?= 5f7d15b21dc01204d806f9b74cd7eaa0c5002254
-# GEOPYSPARK_NETCDF_SHA ?= fe222c25512d26c2578596d654686a81fa84388f
 GEOPYSPARK_VERSION ?= 0.2.0
-GEOPYSPARK_EGG_NAME ?= geopyspark-0.2.0rc5-py3.4.egg
 GEOPYSPARK-JAR := geotrellis-backend-assembly-$(GEOPYSPARK_VERSION).jar
 PYTHON_BLOB1 := friends-of-geopyspark.tar.gz
 PYTHON_BLOB2 := geopyspark-sans-friends.tar.gz
@@ -21,7 +16,7 @@ SRC := archives/gdal-2.1.3.tar.gz archives/geos-3.6.1.tar.bz2 archives/lcms2-2.8
 GDAL_BLOB := gdal-and-friends.tar.gz
 CDM_JAR := netcdfAll-5.0.0-SNAPSHOT.jar
 NETCDF_JAR := gddp-assembly-$(GEOPYSPARK_VERSION).jar
-GEODOCKER_GEOPYSPARK_PUBLISH_TAG ?= "latest"
+GEODOCKER_GEOPYSPARK_PUBLISH_TAG ?= foss4g-2017-workshop
 
 all: stage0 stage2
 
@@ -204,8 +199,9 @@ run-editable:
 	mkdir -p $(HOME)/.aws
 	docker run -it --rm --name geopyspark \
           -p 8000:8000 \
+          -p 4040:4040 \
           $(EXTRA_FLAGS) \
-          -v $(GEOPYSPARK_DIR):/home/hadoop/.local/lib/python3.4/site-packages/$(GEOPYSPARK_EGG_NAME)/geopyspark:rw \
+          -v $(GEOPYSPARK_DIR):/home/hadoop/.local/lib/python3.4/site-packages/geopyspark:rw \
           -v $(GEODOCKER_NOTEBOOK_DIR):/home/hadoop/notebooks:rw \
           -v $(HOME)/.aws:/home/hadoop/.aws:ro \
           $(STAGE2)

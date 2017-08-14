@@ -1,7 +1,4 @@
-archives/*.jar
-archives/*.tar.*
-archives/*.whl
-archives/*.zip
+archives/*
 blobs/
 geopyspark-*/
 netcdf-backend/project/

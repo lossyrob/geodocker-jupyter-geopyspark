@@ -10,7 +10,7 @@ mkdir -p $HOME/local/gdal
 cd $HOME/local/gdal
 tar axf /blobs/$GDALBLOB
 
-# Untar GeoPySpark dependencies 
+# Untar GeoPySpark dependencies
 mkdir -p $HOME/.local/lib/python3.4/site-packages
 cd $HOME/.local/lib/python3.4/site-packages
 tar axf /blobs/$PYTHONBLOB
